@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ChatGPT��� ��� ��������� ������������ Codex������ ������
+������������</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <meta name="robots" content="noindex">
+  <style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.75;max-width:820px;margin:40px auto;padding:0 20px;color:#222;background:#fff}
+  h1{font-size:1.8rem;line-height:1.35;margin-bottom:1.2rem}
+  h2{font-size:1.35rem;margin-top:2.6rem;padding-bottom:.35rem;border-bottom:1px solid #e3e3e3}
+  blockquote{margin:1.2rem 0;padding:.6rem 1.1rem;background:#f6f7f9;border-left:4px solid #b8c0cc;color:#333}
+  blockquote p{margin:.35rem 0}
+  pre{background:#f4f5f7;border:1px solid #e3e3e3;border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:.88rem;line-height:1.55}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  :not(pre)>code{background:#f0f1f4;padding:.12em .4em;border-radius:4px;font-size:.9em}
+  img{max-width:100%;height:auto;border:1px solid #e3e3e3;border-radius:6px;margin:.6rem 0}
+  figure{margin:1.4rem 0}
+  figcaption{font-size:.88rem;color:#666;margin-top:.3rem}
+  a{color:#0b62d6}
+  li{margin:.25rem 0}
+  @media (prefers-color-scheme:dark){body{background:#16171a;color:#e6e6e6}blockquote{background:#202226;border-left-color:#4a5260;color:#ddd}pre{background:#202226;border-color:#33363c}:not(pre)>code{background:#26282d}h2{border-bottom-color:#33363c}img{border-color:#33363c}figcaption{color:#9aa0a6}a{color:#6cb0ff}}
+  </style>
+</head>
+<body>
+<h1
+id="chatgpt로-내-리눅스-노트북을-codex처럼-원격-조작하기-codex-사용량은-그대로였다">ChatGPT로
+내 리눅스 노트북을 Codex처럼 원격 조작하기 (Codex 사용량은
+그대로였다)</h1>
+<blockquote>
+<p><strong>이 글을 읽기 전에</strong></p>
+<ul>
+<li><strong>기록의 성격</strong>: 2026년 9월 20일 하루 동안 내 환경 한
+곳에서 한 번 성공한 과정을 그대로 정리했다. 다른 환경에서도 똑같이
+되는지는 확인하지 못했다.</li>
+<li><strong>내 환경</strong>: apt를 쓰는 리눅스 노트북(x86_64, SSH로만
+접속, 브라우저 없음), ChatGPT Plus 계정(웹), OpenAI Platform 개인
+조직(결제 수단 없음, 크레딧 $0), tunnel-client v0.0.14, cokacremote
+0.1.0, Docker 이미지 node:22-bookworm.</li>
+<li><strong>공식 지원 방식이 아니다</strong>: OpenAI의 Secure MCP
+Tunnel과 서드파티 MCP 서버(cokacremote)를 조합했다. 터널은 문서상 개발자
+모드 테스트 같은 비공개 연결용이고, 이 MCP 서버는 OpenAI가 검토한 것이
+아니다.</li>
+<li><strong>사용량 결과의 범위</strong>: “Codex 사용량이 안 줄었다”는 건
+프로필 메뉴의 5h / Weekly 미터를 눈으로 비교한 관찰이다. 미터가 정수
+%로만 표시돼서 미세한 소모는 안 보일 수 있고, 이 방식이 Codex 한도와
+무관하다고 OpenAI 문서로 확인한 것도 아니다. 사용량 집계 방식은 OpenAI가
+바꿀 수 있어서(9번 참고) 정책이 바뀌면 결과도 달라질 수 있다.</li>
+<li><strong>비용</strong>: 결제 수단을 등록하지 않은 채로 끝까지
+동작했다. 다만 터널에 별도 요금이 있는지는 공식 문서에서 명확히 확인하지
+못했다. 따라 할 때는 Platform의 Billing과 Usage를 직접 확인하면서
+진행하자.</li>
+<li><strong>보안</strong>: 이 구성은 ChatGPT에 내 노트북(정확히는 Docker
+컨테이너 안)에서 명령을 실행할 권한을 주는 것이다. 따라 하다가 생기는
+문제의 책임은 각자에게 있다.</li>
+</ul>
+</blockquote>
+<h2 id="먼저-결론">먼저 결론</h2>
+<p>남는 리눅스 노트북(SSH 전용, 브라우저 없음)을 ChatGPT의
+<strong>플러그인(개발자 모드 MCP)</strong>으로 연결했다. ChatGPT
+대화창에서 파일을 읽고 쓰고 명령을 실행시킬 수 있다. <strong>Chat
+탭</strong>에서 이 플러그인으로 벤치마크를 60회 실행하는 작업을 10분
+넘게 돌렸는데, 사용량 미터가 <strong>5h 97% / Weekly 69%</strong>로
+그대로였다. Codex로 같은 정도 작업을 하면 10분에 4% 넘게 줄곤
+했었다.</p>
+<pre><code>ChatGPT (Chat 탭)
+  → OpenAI Secure MCP Tunnel
+  → tunnel-client (노트북, 아웃바운드 연결만)
+  → cokacremote MCP 서버 (Docker, 127.0.0.1:3000)
+  → /shared  (= 노트북의 ~/work 폴더 하나)</code></pre>
+<ul>
+<li>공유기 포트포워딩, 도메인, 인증서가 필요 없었고 노트북에 인바운드
+포트도 없다.</li>
+<li>서버는 Docker 컨테이너 안에서만 돌고, 호스트 폴더는 하나만
+연결했다.</li>
+</ul>
+<p><strong>Work 탭은 피해야 한다.</strong> 처음에는 플러그인이 Chat 탭에
+안 보여서 Work 탭에서 썼는데, 그러자 Codex 사용량이 줄어드는 것처럼
+보였다. OpenAI 도움말에는 Codex, ChatGPT Work, ChatGPT for Excel,
+Workspace Agents가 공유 한도와 크레딧 풀을 함께 쓴다고 나와 있다. 나중에
+Chat 탭에서도 플러그인이 보이기 시작했다. 반영이 늦었던 것 같은데 원인은
+확실하지 않다.</p>
+<figure>
+<img src="images/13-work-tab.png"
+alt="Work 탭. 이 탭에서 쓰면 Codex와 한도를 공유하는 풀에서 차감되는 것처럼 보였다" />
+<figcaption aria-hidden="true">Work 탭. 이 탭에서 쓰면 Codex와 한도를
+공유하는 풀에서 차감되는 것처럼 보였다</figcaption>
+</figure>
+<figure>
+<img src="images/14-chat-tab-plugin.png"
+alt="Chat 탭. 입력창에 플러그인(SSalMuk-Plugin)이 선택된 상태" />
+<figcaption aria-hidden="true">Chat 탭. 입력창에
+플러그인(SSalMuk-Plugin)이 선택된 상태</figcaption>
+</figure>
+<h2 id="준비물">준비물</h2>
+<ul>
+<li>SSH로 접속되는 리눅스 노트북. Docker와 Docker Compose가 설치돼
+있어야 한다(이 글은 x86_64 기준).</li>
+<li>ChatGPT 유료 플랜(나는 Plus). 개발자 모드를 쓸 수 있어야 한다.</li>
+<li>OpenAI Platform(API) 계정. ChatGPT와 같은 로그인으로 들어간다.
+<strong>나는 결제 수단을 등록하지 않았고 크레딧도 $0인 상태</strong>로
+끝까지 진행됐다.</li>
+</ul>
+<p>Platform의 “Add payment details”는 누르지 않았다. 터널에 별도 요금이
+있는지는 공식 문서에서 확인하지 못했고, Usage와 Billing을 계속 확인하고
+있다.</p>
+<figure>
+<img src="images/01-billing-free-trial.png"
+alt="Platform Billing 화면. Free trial, 크레딧 $0.00, 결제 수단 없음" />
+<figcaption aria-hidden="true">Platform Billing 화면. Free trial, 크레딧
+$0.00, 결제 수단 없음</figcaption>
+</figure>
+<h2 id="chatgpt-개발자-모드-켜기">1. ChatGPT 개발자 모드 켜기</h2>
+<p>ChatGPT 설정 → Security and login에서 <strong>Developer
+mode</strong>를 켰다. 바로 아래의 “device code authorization for
+Codex”는 이번 작업과 상관없어서 꺼 둔 채로 뒀다.</p>
+<figure>
+<img src="images/02-developer-mode.png"
+alt="ChatGPT 설정 → Security and login → Developer mode" />
+<figcaption aria-hidden="true">ChatGPT 설정 → Security and login →
+Developer mode</figcaption>
+</figure>
+<h2 id="platform에서-터널-만들기">2. Platform에서 터널 만들기</h2>
+<p><code>platform.openai.com/settings/organization/tunnels</code>에서
+<strong>Create tunnel</strong>을 눌러 이름과 설명을 넣었다.
+Organizations는 Personal, ChatGPT workspaces는 개인 워크스페이스로
+골랐다. 생성하면 <strong>tunnel_id</strong>(<code>tunnel_</code> +
+32자)가 나오는데, 이걸 메모해 둔다. 같은 페이지에 tunnel-client 다운로드
+버튼도 있다.</p>
+<figure>
+<img src="images/03-tunnels-page.png"
+alt="Platform의 Tunnels 페이지. Create tunnel과 Download tunnel-client 버튼이 있다" />
+<figcaption aria-hidden="true">Platform의 Tunnels 페이지. Create
+tunnel과 Download tunnel-client 버튼이 있다</figcaption>
+</figure>
+<figure>
+<img src="images/04-create-tunnel-form.png"
+alt="터널 생성 폼. 조직 ID와 워크스페이스 ID는 가렸다" />
+<figcaption aria-hidden="true">터널 생성 폼. 조직 ID와 워크스페이스 ID는
+가렸다</figcaption>
+</figure>
+<h2 id="runtime-api-키-만들기-권한은-tunnels만">3. runtime API 키 만들기
+(권한은 Tunnels만)</h2>
+<p><code>platform.openai.com/settings/organization/api-keys</code>에서
+Create new secret key를 눌렀다.</p>
+<ul>
+<li>Owned by: You / Project: Default project</li>
+<li>Expiration: Custom 90일</li>
+<li>Permissions: <strong>Restricted</strong>를 고르고
+<strong>Tunnels만</strong> 켰다. 나머지는 전부 None이다. 문서상 실행용
+키에는 Tunnels Read + Use 권한이 필요하다.</li>
+</ul>
+<p>키 전체는 <strong>생성 직후 한 번만</strong> 보여서 바로 복사해
+보관했다. 90일 뒤 만료되면 새로 만들어 교체하면 된다.</p>
+<figure>
+<img src="images/05-api-key-form.png"
+alt="API 키 생성 폼. Default project, 만료 90일" />
+<figcaption aria-hidden="true">API 키 생성 폼. Default project, 만료
+90일</figcaption>
+</figure>
+<figure>
+<img src="images/06-api-key-permissions.png"
+alt="권한 화면. Tunnels만 선택되고 나머지는 None, 선택된 권한은 2개" />
+<figcaption aria-hidden="true">권한 화면. Tunnels만 선택되고 나머지는
+None, 선택된 권한은 2개</figcaption>
+</figure>
+<h2 id="노트북에-mcp-서버-올리기-docker">4. 노트북에 MCP 서버 올리기
+(Docker)</h2>
+<p>MCP 서버는 <a
+href="https://github.com/kstost/cokacremote">cokacremote</a>를
+썼다(MIT). 셸 실행과 파일 읽기·쓰기·삭제 도구 20개를 제공한다. README가
+<strong>샌드박스, 명령 허용 목록, 실행 승인, 경로 제한이 없다</strong>고
+직접 경고하는 도구라서, 호스트에 그냥 깔지 않고 <strong>Docker
+안에서만</strong> 돌렸다.</p>
+<p>먼저 저장소를 받아 코드를 훑어보고 커밋 해시를 고정했다.</p>
+<pre class="bash"><code>git clone https://github.com/kstost/cokacremote.git /tmp/cokac-review
+cd /tmp/cokac-review &amp;&amp; git log -1 --format=%H     # 나온 해시를 아래 REF에 넣기
+mkdir -p ~/work ~/cokac &amp;&amp; cd ~/cokac</code></pre>
+<p><code>~/cokac</code>에 세 파일을 만들었다.</p>
+<p><strong>Dockerfile</strong></p>
+<pre class="dockerfile"><code>FROM node:22-bookworm
+
+RUN apt-get update \
+ &amp;&amp; apt-get install -y --no-install-recommends git python3 openssl curl ca-certificates \
+ &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+ARG REPO_URL=https://github.com/kstost/cokacremote.git
+ARG REF=main
+RUN git clone &quot;$REPO_URL&quot; /opt/cokacremote \
+ &amp;&amp; cd /opt/cokacremote \
+ &amp;&amp; git checkout &quot;$REF&quot; \
+ &amp;&amp; npm ci \
+ &amp;&amp; npm run build
+
+WORKDIR /shared
+ENV MCP_DEFAULT_CWD=/shared
+EXPOSE 3000
+
+CMD [&quot;npm&quot;, &quot;--prefix&quot;, &quot;/opt/cokacremote&quot;, &quot;start&quot;]</code></pre>
+<p><strong>docker-compose.yml</strong></p>
+<pre class="yaml"><code>services:
+  cokacremote:
+    build:
+      context: .
+      args:
+        REPO_URL: ${REPO_URL:-https://github.com/kstost/cokacremote.git}
+        REF: ${REF:-main}
+    container_name: cokacremote
+    restart: unless-stopped
+    ports:
+      - &quot;127.0.0.1:3000:3000&quot;
+    volumes:
+      - ${SHARED_PATH:?set SHARED_PATH in .env}:/shared
+    environment:
+      MCP_HOST: &quot;0.0.0.0&quot;
+      MCP_PORT: &quot;3000&quot;
+      MCP_DEFAULT_CWD: /shared
+      MCP_ALLOWED_HOSTS: &quot;127.0.0.1,localhost&quot;
+      MCP_AUTH_TOKEN: &quot;&quot;
+      MCP_OAUTH_ENABLED: &quot;false&quot;
+      MCP_ALLOW_NO_AUTH: &quot;true&quot;
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 2g
+    pids_limit: 512
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;curl&quot;, &quot;-fsS&quot;, &quot;http://127.0.0.1:3000/health&quot;]
+      interval: 30s
+      timeout: 5s
+      retries: 3</code></pre>
+<p><strong>.env</strong></p>
+<pre><code>SHARED_PATH=/home/&lt;내 계정&gt;/work
+REPO_URL=https://github.com/kstost/cokacremote.git
+REF=&lt;위에서 얻은 커밋 해시&gt;</code></pre>
+<p>핵심은 세 가지다.</p>
+<ul>
+<li>호스트에는 <code>127.0.0.1</code>에만 포트를 열어서 같은 망의 다른
+기기도 못 붙는다.</li>
+<li>마운트는 <code>~/work</code> 하나뿐이다.</li>
+<li>서버 내장 인증을 껐다. 앞단의 터널이 내 계정에 묶어 주기 때문이고,
+README가 허용하는 “외부 인증 계층” 모드다.</li>
+</ul>
+<pre class="bash"><code>docker compose up -d --build
+curl -s http://127.0.0.1:3000/health</code></pre>
+<p>응답에 <code>"oauthEnabled":false</code>가 보이면
+정상이다(<code>unrestrictedHostAccess:true</code>는 서버의 원래 성격이라
+그대로 나온다). 노출 범위도 확인했다.</p>
+<pre class="bash"><code>ss -ltn | grep 3000                     # 127.0.0.1:3000 이어야 함 (0.0.0.0이면 중단)
+docker inspect cokacremote --format &#39;{{.HostConfig.Privileged}} {{range .Mounts}}{{.Source}}-&gt;{{.Destination}} {{end}}&#39;
+# false /home/&lt;계정&gt;/work-&gt;/shared</code></pre>
+<h2 id="노트북에-tunnel-client-설치하고-연결하기">5. 노트북에
+tunnel-client 설치하고 연결하기</h2>
+<p>릴리스 페이지에서 Linux용 <strong>풀 클라이언트</strong>를
+받았다(<code>runtime</code>이 이름에 붙은 건 실행 전용이라
+<code>init</code>과 <code>doctor</code>가 없다).</p>
+<pre class="bash"><code>cd /tmp
+curl -fsSLO https://persistent.oaistatic.com/tunnel-client/v0.0.14/tunnel-client-v0.0.14-linux-amd64.zip
+curl -fsSLO https://github.com/openai/tunnel-client/releases/download/v0.0.14/SHA256SUMS.txt
+sha256sum -c --ignore-missing SHA256SUMS.txt      # ...linux-amd64.zip: OK 확인
+sudo apt install -y unzip
+unzip tunnel-client-v0.0.14-linux-amd64.zip -d tc
+sudo install -m 755 tc/tunnel-client /usr/local/bin/tunnel-client</code></pre>
+<p>버전은 바뀔 수 있으니 <a
+href="https://github.com/openai/tunnel-client/releases">릴리스
+페이지</a>에서 최신을 확인하자. arm64는 파일 이름의 <code>amd64</code>만
+바꾸면 된다.</p>
+<p>API 키는 명령줄에 적지 않고 입력 대기 상태에서 붙여넣었다.</p>
+<pre class="bash"><code>read -rs CONTROL_PLANE_API_KEY &amp;&amp; export CONTROL_PLANE_API_KEY   # 키 붙여넣고 Enter (화면에 안 보임)
+tunnel-client init --sample sample_mcp_remote_no_auth --profile local-http --tunnel-id tunnel_&lt;내 ID&gt; --mcp-server-url http://127.0.0.1:3000/mcp
+tunnel-client doctor --profile local-http --explain
+tunnel-client run --profile local-http</code></pre>
+<ul>
+<li><code>init</code>은 <strong>한 줄로</strong> 입력해야 한다. 줄바꿈
+기호(<code>\</code>)와 다음 명령이 합쳐져서 에러가 났었다.</li>
+<li><code>doctor</code>가 <code>RESULT ok</code>를 내면
+<code>run</code>으로 넘어간다. <code>mcp_server_reachable</code>에서
+HTTP 405가 나오는 건 정상이다(이 서버는 GET을 405로 거절한다).</li>
+<li>다른 창에서 <code>curl -fsS http://127.0.0.1:8080/readyz</code>가
+<code>ready</code>면 연결된 것이다. 8080이 이미 쓰이고 있다면
+<code>run</code>에 <code>--health.listen-addr 127.0.0.1:18080</code>을
+붙이면 된다. 나는 8080을 쓰던 옛 서비스를 꺼서 기본 포트를 그대로
+썼다.</li>
+</ul>
+<h2 id="chatgpt에서-플러그인-만들기">6. ChatGPT에서 플러그인 만들기</h2>
+<p><code>chatgpt.com/plugins</code>에서 + 버튼을 누르고
+<strong>Connection을 Tunnel</strong>로 골라 내 터널을 선택했다(안 보이면
+“Use tunnel ID instead”로 tunnel_id를 직접 입력하면 된다).
+<strong>Authentication 기본값이 OAuth인데, 반드시 No Auth로 바꿔야
+한다.</strong> “I understand and want to continue”에 체크하고 Create →
+Connect를 눌렀다.</p>
+<figure>
+<img src="images/07-plugin-form-oauth-default.png"
+alt="새 플러그인 폼. Authentication 기본값이 OAuth다. 터널 ID는 가렸다" />
+<figcaption aria-hidden="true">새 플러그인 폼. Authentication 기본값이
+OAuth다. 터널 ID는 가렸다</figcaption>
+</figure>
+<figure>
+<img src="images/08-plugin-form-no-auth.png"
+alt="Authentication을 No Auth로 바꾼 모습" />
+<figcaption aria-hidden="true">Authentication을 No Auth로 바꾼
+모습</figcaption>
+</figure>
+<figure>
+<img src="images/09-plugin-connect.png" alt="Connect 화면" />
+<figcaption aria-hidden="true">Connect 화면</figcaption>
+</figure>
+<h2 id="동작과-격리-확인">7. 동작과 격리 확인</h2>
+<p><strong>Chat 탭</strong>의 새 대화에서 플러그인을 선택하고 이렇게
+시켜 봤다.</p>
+<blockquote>
+<p>여기는 Docker 컨테이너이고 작업 폴더는 /shared야.
+<code>whoami</code>, <code>cat /etc/os-release</code>,
+<code>ls /home</code>을 실행해서 결과를 그대로 보여줘.</p>
+</blockquote>
+<p>결과는 <code>root</code>,
+<code>Debian GNU/Linux 12 (bookworm)</code>이 나왔고
+<code>/home</code>에는 컨테이너 기본 계정만 보였다. 내 계정은 안
+보였으니 <strong>호스트가 아니라 컨테이너 안에서 실행되고
+있다</strong>는 뜻이다.</p>
+<figure>
+<img src="images/10-test-whoami-osrelease.png"
+alt="whoami, os-release, ls /home 실행 결과. 컨테이너(Debian) 안에서 실행됐다" />
+<figcaption aria-hidden="true">whoami, os-release, ls /home 실행 결과.
+컨테이너(Debian) 안에서 실행됐다</figcaption>
+</figure>
+<p>이어서 <code>/shared</code>에 파일을 만들게 하고 노트북에서
+확인했다.</p>
+<blockquote>
+<p>/shared 안에 test-folder라는 폴더를 만들고 hello.txt에 “hello”라고
+써줘.</p>
+</blockquote>
+<figure>
+<img src="images/11-test-create-hello.png"
+alt="ChatGPT가 /shared/test-folder/hello.txt를 만들었다" />
+<figcaption aria-hidden="true">ChatGPT가 /shared/test-folder/hello.txt를
+만들었다</figcaption>
+</figure>
+<pre class="bash"><code>ls -la ~/work/test-folder</code></pre>
+<p>소유자가 root로 보이는 건 컨테이너가 root로 파일을 만들어서라
+정상이다.</p>
+<figure>
+<img src="images/12-host-ls-test-folder.png"
+alt="노트북에서 확인한 결과. hello.txt가 실제로 생겼다(계정명과 호스트명은 user와 laptop-server로 바꿔 표시했다)" />
+<figcaption aria-hidden="true">노트북에서 확인한 결과. hello.txt가
+실제로 생겼다(계정명과 호스트명은 user와 laptop-server로 바꿔
+표시했다)</figcaption>
+</figure>
+<h2 id="재부팅해도-유지되게-systemd로-등록하기">8. 재부팅해도 유지되게
+systemd로 등록하기</h2>
+<p>tunnel-client를 서비스로 등록했다. 컨테이너는
+<code>restart: unless-stopped</code>라서 Docker가 켜지면 같이 올라온다.
+<code>systemctl is-enabled docker</code>가 <code>enabled</code>인지도
+확인해 두자.</p>
+<pre class="bash"><code>sudo tee /etc/systemd/system/tunnel-client.service &gt;/dev/null &lt;&lt;&#39;EOF&#39;
+[Unit]
+Description=OpenAI Secure MCP Tunnel client
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=&lt;내 계정&gt;
+EnvironmentFile=/etc/tunnel-client.env
+ExecStart=/usr/local/bin/tunnel-client run --profile local-http
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo install -m 600 /dev/null /etc/tunnel-client.env
+read -rs K; echo &quot;CONTROL_PLANE_API_KEY=$K&quot; | sudo tee /etc/tunnel-client.env &gt;/dev/null; unset K
+sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now tunnel-client
+systemctl is-active tunnel-client &amp;&amp; curl -fsS http://127.0.0.1:8080/readyz</code></pre>
+<ul>
+<li><code>User</code>는 <code>tunnel-client init</code>을 실행한 계정과
+같아야 한다. 프로필이 그 계정의 설정 폴더에 만들어지기 때문이다.</li>
+<li>미리 돌려 둔 tmux의 <code>tunnel-client run</code>은 꼭 종료해야
+한다. 8080 포트가 겹쳐서 서비스가 실패하는데도 <code>readyz</code>는 옛
+프로세스가 대신 답해서 정상처럼 보인다. 나도 tmux에 옛 프로세스가 남아
+있어서 한 번 걸렸었다. <code>pgrep -af tunnel-client</code> 결과가 한
+줄인지 확인하자.</li>
+</ul>
+<h2 id="사용량은-이렇게-확인했다">9. 사용량은 이렇게 확인했다</h2>
+<p>프로필 메뉴의 <strong>Usage remaining</strong>에 5h와 Weekly가 정수
+%로 나온다. 세 가지를 확인했다.</p>
+<ol type="1">
+<li><p>시작 전 값은 <strong>5h 97%, Weekly 69%</strong>였다.</p>
+<figure>
+<img src="images/15-usage-before.png"
+alt="작업 전 사용량. 5h 97%, Weekly 69%(이름은 가렸다)" />
+<figcaption aria-hidden="true">작업 전 사용량. 5h 97%, Weekly 69%(이름은
+가렸다)</figcaption>
+</figure></li>
+<li><p>아래 작업을 <strong>Chat 탭 + 플러그인</strong>으로 실행했다.
+소수 구하기 알고리즘 3종을 각각 20번씩, 실행마다 별도 명령으로 돌리게
+했고 검증 테스트와 결과 파일도 만들게 했다. 작업이 끝나자
+<code>bench.tsv</code>에 60회 실행 기록이 남아 있었다.</p>
+<figure>
+<img src="images/16-bench-files.png"
+alt="ChatGPT가 만든 결과 파일 목록. bench.tsv에 60회 실행 기록이 저장됐다" />
+<figcaption aria-hidden="true">ChatGPT가 만든 결과 파일 목록.
+bench.tsv에 60회 실행 기록이 저장됐다</figcaption>
+</figure></li>
+<li><p>작업이 진행되고 10분 넘게 지난 시점에 다시 확인했을 때도
+<strong>5h 97%, Weekly 69%</strong>로 그대로였다.</p>
+<figure>
+<img src="images/17-usage-during.png"
+alt="작업이 10분 넘게 진행된 뒤의 사용량. 값이 그대로다(이름은 가렸다)" />
+<figcaption aria-hidden="true">작업이 10분 넘게 진행된 뒤의 사용량. 값이
+그대로다(이름은 가렸다)</figcaption>
+</figure></li>
+</ol>
+<p><strong>한계도 적어 둔다.</strong></p>
+<ul>
+<li>정수 %로만 표시돼서 아주 미세한 소모는 안 보일 수 있다.</li>
+<li>정책이 바뀔 수 있다. 정리 글에 따르면 OpenAI가 올여름 사용량 미터를
+개편해서, 일반 채팅과 별개로 Work와 Codex가 5시간 단위 창의 공유 한도를
+쓰는 구조가 됐다.</li>
+<li>이건 “Codex와 같은 풀에서 안 빠진다”는 관찰이지 “아무 한도도 안
+쓴다”는 뜻이 아니다.</li>
+</ul>
+<h2 id="보안-이건-원격-명령-실행-도구다">10. 보안: 이건 원격 명령 실행
+도구다</h2>
+<ul>
+<li>도구를 호출하는 건 사실상 모델이라, 모델이 읽은 웹페이지나 문서에
+숨은 지시(프롬프트 인젝션)에 속으면 의도하지 않은 명령이 실행될 수 있다.
+출처가 불분명한 내용을 이 플러그인이 켜진 대화에서 읽히지 말자.</li>
+<li>Docker가 피해를 컨테이너와 <code>~/work</code>로 가둔다. 컨테이너는
+인터넷에 나갈 수 있고 <code>/shared</code> 안 파일은 읽고 쓰고 지울 수
+있으니, <strong><code>/shared</code>에 SSH 키, 비밀번호, API 키를 두면
+안 된다.</strong></li>
+<li>ChatGPT 계정이 곧 이 도구의 열쇠다. 2단계 인증을 켜 두자.</li>
+<li>이 터널은 개발자 모드 테스트 같은 비공개 연결용이라 공개 플러그인
+배포를 지원하지 않는다. 플러그인을 <strong>제출하거나 공유하지
+말자.</strong></li>
+<li>컨테이너 안에서 <code>apt install</code> 등으로 바꾼 것은 컨테이너를
+삭제하거나 재빌드하면 사라진다. 남길 결과물은 <code>/shared</code>에,
+항상 필요한 도구는 Dockerfile에 넣자.</li>
+</ul>
+<h2 id="정리하고-싶을-때">정리하고 싶을 때</h2>
+<pre class="bash"><code>sudo systemctl disable --now tunnel-client
+docker compose -f ~/cokac/docker-compose.yml down     # 잠깐 멈추려면 stop
+sudo rm -rf ~/work/test-folder                        # 컨테이너 root 소유라 sudo 필요</code></pre>
+<p>그다음 Platform에서 API 키를 폐기하고 터널을 삭제하면 된다.</p>
+<h2 id="참고한-자료">참고한 자료</h2>
+<ul>
+<li><a
+href="https://developers.openai.com/api/docs/guides/secure-mcp-tunnels">OpenAI
+Secure MCP Tunnel 문서</a></li>
+<li><a
+href="https://github.com/openai/tunnel-client">openai/tunnel-client
+(GitHub)</a></li>
+<li><a href="https://developers.openai.com/plugins/quickstart">OpenAI
+플러그인 퀵스타트</a></li>
+<li><a
+href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">Using
+Codex with your ChatGPT plan (OpenAI 도움말)</a></li>
+<li><a href="https://github.com/kstost/cokacremote">cokacremote
+(GitHub)</a></li>
+</ul>
+<script>
+/* iframe 안에서 열렸을 때만, 자기 높이를 부모 페이지에 알린다 */
+(function () {
+  if (window.parent === window) return;
+  function send() {
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    parent.postMessage({ type: 'iframe-height', height: h + 2 }, '*');
+  }
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.documentElement);
+  setTimeout(send, 300);
+  setTimeout(send, 1500);
+})();
+</script>
+</body>
+</html>
